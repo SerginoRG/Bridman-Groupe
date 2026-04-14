@@ -226,7 +226,7 @@ function Contact() {
           {/* Paragraphe avec animation lettre par lettre */}
           <AnimatedText
             text="N'hésitez pas à nous contacter pour toute information ou demande de service."
-            className="text-xl text-gray-300 max-w-2xl mx-auto"
+            className="text-xl text-gray-300 max-w-3xl mx-auto"
             delay={0.5}
           />
         </motion.div>
