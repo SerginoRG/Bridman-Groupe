@@ -18,15 +18,15 @@ interface Service {
   isVideo?: boolean
 }
 
-// Composant d'animation texte lettre par lettre
+// Composant d'animation texte mot par mot
 const AnimatedText = ({ text, className, delay = 0 }: { text: string; className: string; delay?: number }) => {
-  const characters = text.split("")
+  const words = text.split(" ")
 
   const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.03, delayChildren: delay },
+      transition: { staggerChildren: 0.08, delayChildren: delay },
     },
   }
 
@@ -40,22 +40,22 @@ const AnimatedText = ({ text, className, delay = 0 }: { text: string; className:
   }
 
   return (
-    <motion.div
+    <motion.p
       className={className}
       variants={container}
       initial="hidden"
       animate="visible"
     >
-      {characters.map((char: string, index: number) => (
+      {words.map((word: string, index: number) => (
         <motion.span
           key={index}
           variants={child}
-          style={{ display: "inline-block" }}
+          style={{ display: "inline-block", marginRight: "0.25em" }}
         >
-          {char === " " ? "\u00A0" : char}
+          {word}
         </motion.span>
       ))}
-    </motion.div>
+    </motion.p>
   )
 }
 
@@ -89,17 +89,17 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
       {/* Image de fond */}
       <div className="absolute inset-0 z-0">
         {service.isVideo ? (
-          <video 
-            src={service.image} 
+          <video
+            src={service.image}
             className="w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300"
-            autoPlay 
-            loop 
-            muted 
+            autoPlay
+            loop
+            muted
             playsInline
           />
         ) : (
-          <img 
-            src={service.image} 
+          <img
+            src={service.image}
             alt={service.title}
             className="w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300"
           />
@@ -109,7 +109,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 
       {/* Dégradé coloré en haut de la carte */}
       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${service.color} z-10`}></div>
-      
+
       {/* Contenu de la carte */}
       <div className="relative z-10 p-6">
         {/* Icône avec animation */}
@@ -121,14 +121,14 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
         >
           <span className="text-3xl">{service.icon}</span>
         </motion.div>
-        
-        {/* Titre avec animation lettre par lettre */}
+
+        {/* Titre avec animation mot par mot */}
         <AnimatedText
           text={service.title}
           className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300"
           delay={index * 0.1 + 0.3}
         />
-        
+
         {/* Description avec animation d'apparition */}
         <motion.p
           initial={{ opacity: 0 }}
@@ -202,7 +202,6 @@ function Services() {
     }
   ]
 
-  // Animation pour le titre
   const titleVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -228,15 +227,15 @@ function Services() {
               Services
             </span>
           </h1>
-          
+
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "6rem" }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="h-1 bg-gradient-to-r from-blue-500 to-blue-300 mx-auto rounded-full mb-6"
           ></motion.div>
-          
-          {/* Paragraphe avec animation lettre par lettre */}
+
+          {/* Paragraphe avec animation mot par mot */}
           <AnimatedText
             text="Voici nos services qui vous garantissent des résultats professionnels"
             className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto"

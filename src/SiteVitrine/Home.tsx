@@ -8,15 +8,15 @@ import imag2 from "../assets/image-two.jpg"
 import imag3 from "../assets/image-three.jpg"
 import imag4 from "../assets/image-four.jpg"
 
-// Composant d'animation texte lettre par lettre
+// Composant d'animation texte mot par mot
 const AnimatedText = ({ text, className }: { text: string; className: string }) => {
-  const characters = text.split("")
+  const words = text.split(" ")
 
   const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.03, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.08, delayChildren: 0.2 },
     },
   }
 
@@ -30,22 +30,22 @@ const AnimatedText = ({ text, className }: { text: string; className: string }) 
   }
 
   return (
-    <motion.div
+    <motion.p
       className={className}
       variants={container}
       initial="hidden"
       animate="visible"
     >
-      {characters.map((char: string, index: number) => (
+      {words.map((word: string, index: number) => (
         <motion.span
           key={index}
           variants={child}
-          style={{ display: "inline-block" }}
+          style={{ display: "inline-block", marginRight: "0.25em" }}
         >
-          {char === " " ? "\u00A0" : char}
+          {word}
         </motion.span>
       ))}
-    </motion.div>
+    </motion.p>
   )
 }
 
@@ -91,7 +91,7 @@ function Home() {
               index === currentImage ? "opacity-100" : "opacity-0"
             }`}
           >
-            <div 
+            <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${img})` }}
             />
@@ -130,8 +130,8 @@ function Home() {
             key={index}
             onClick={() => setCurrentImage(index)}
             className={`transition-all duration-300 rounded-full ${
-              index === currentImage 
-                ? "w-10 h-2 bg-white" 
+              index === currentImage
+                ? "w-10 h-2 bg-white"
                 : "w-2 h-2 bg-white/50 hover:bg-white/75"
             }`}
             aria-label={`Aller à l'image ${index + 1}`}
@@ -169,7 +169,7 @@ function Home() {
           </span>
         </motion.h1>
 
-        {/* PARAGRAPHE AVEC ANIMATION LETTRE PAR LETTRE */}
+        {/* PARAGRAPHE AVEC ANIMATION MOT PAR MOT */}
         <AnimatedText
           text="Découvrez nos services de design professionnel pour booster votre image de marque et attirer plus de clients."
           className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed"
@@ -181,15 +181,15 @@ function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <Link 
+          <Link
             to="/about"
             className="group inline-flex items-center gap-2 mt-5 px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >
             <span>En savoir plus sur nos services</span>
-            <svg 
-              className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

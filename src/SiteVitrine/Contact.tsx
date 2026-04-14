@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from "react"
 import type { ChangeEvent, FormEvent } from "react"
 import { motion, useAnimation, useInView } from "framer-motion"
 import Image from "../assets/Contact/one.jpg"
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCommentDots,FaWhatsapp } from "react-icons/fa"
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCommentDots, FaWhatsapp } from "react-icons/fa"
 
-// Composant d'animation texte lettre par lettre
+// Composant d'animation texte mot par mot
 const AnimatedText = ({ text, className, delay = 0 }: { text: string; className: string; delay?: number }) => {
-  const characters = text.split("")
+  const words = text.split(" ")
 
   const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.03, delayChildren: delay },
+      transition: { staggerChildren: 0.08, delayChildren: delay },
     },
   }
 
@@ -26,22 +26,22 @@ const AnimatedText = ({ text, className, delay = 0 }: { text: string; className:
   }
 
   return (
-    <motion.div
+    <motion.p
       className={className}
       variants={container}
       initial="hidden"
       animate="visible"
     >
-      {characters.map((char: string, index: number) => (
+      {words.map((word: string, index: number) => (
         <motion.span
           key={index}
           variants={child}
-          style={{ display: "inline-block" }}
+          style={{ display: "inline-block", marginRight: "0.25em" }}
         >
-          {char === " " ? "\u00A0" : char}
+          {word}
         </motion.span>
       ))}
-    </motion.div>
+    </motion.p>
   )
 }
 
@@ -139,10 +139,10 @@ const InfoCard = ({ icon: Icon, label, value, delay = 0 }: { icon: React.Compone
       <AnimatedText
         text={value}
         className={`text-white font-semibold ${
-            label === "Email" ? "text-[11px] break-all" : "text-xs"
+          label === "Email" ? "text-[11px] break-all" : "text-xs"
         }`}
         delay={delay + 0.3}
-        />
+      />
     </motion.div>
   )
 }
@@ -155,7 +155,6 @@ function Contact() {
     message: ""
   })
 
-  // Animations pour l'en-tête
   const headerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -165,7 +164,6 @@ function Contact() {
     },
   }
 
-  // Animation pour l'image
   const imageControls = useAnimation()
   const imageRef = useRef(null)
   const isImageInView = useInView(imageRef, { once: true, amount: 0.3 })
@@ -176,7 +174,6 @@ function Contact() {
     }
   }, [imageControls, isImageInView])
 
-  // Animation pour le bouton
   const buttonControls = useAnimation()
   const buttonRef = useRef(null)
   const isButtonInView = useInView(buttonRef, { once: true, amount: 0.3 })
@@ -204,7 +201,7 @@ function Contact() {
   return (
     <div className="min-h-screen from-gray-900 via-purple-900 to-gray-900 mt-10 py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Titre principal avec animations */}
+        {/* Titre principal */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -217,15 +214,15 @@ function Contact() {
               nous
             </span>
           </h1>
-          
+
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "6rem" }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"
           />
-          
-          {/* Paragraphe avec animation lettre par lettre */}
+
+          {/* Paragraphe avec animation mot par mot */}
           <AnimatedText
             text="N'hésitez pas à nous contacter pour toute information ou demande de service."
             className="text-xl text-gray-300 max-w-3xl mx-auto"
@@ -234,8 +231,8 @@ function Contact() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
-          {/* Partie gauche - Image avec animations */}
+
+          {/* Partie gauche - Image */}
           <motion.div
             ref={imageRef}
             initial="hidden"
@@ -267,8 +264,7 @@ function Contact() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/30 to-transparent" />
-              
-              {/* Texte superposé sur l'image */}
+
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={isImageInView ? { opacity: 1, y: 0 } : {}}
@@ -295,7 +291,6 @@ function Contact() {
             className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-2xl"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Email */}
               <AnimatedInput
                 label="Email"
                 icon={FaEnvelope}
@@ -307,8 +302,6 @@ function Contact() {
                 required={true}
                 delay={0.1}
               />
-
-              {/* Téléphone */}
               <AnimatedInput
                 label="Téléphone"
                 icon={FaPhone}
@@ -320,8 +313,6 @@ function Contact() {
                 required={true}
                 delay={0.2}
               />
-
-              {/* Adresse */}
               <AnimatedInput
                 label="Adresse"
                 icon={FaMapMarkerAlt}
@@ -333,8 +324,6 @@ function Contact() {
                 required={false}
                 delay={0.3}
               />
-
-              {/* Message */}
               <AnimatedInput
                 label="Message"
                 icon={FaCommentDots}
