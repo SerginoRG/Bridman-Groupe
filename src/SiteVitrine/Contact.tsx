@@ -388,7 +388,7 @@ function Contact() {
               <InfoCard
                 icon={FaClock}
                 label="Horaires"
-                value="Lun - Sam / 9h-18h"
+                value="Lun - Sam / 8h-18h"
                 delay={0.3}
               />
             </div>
