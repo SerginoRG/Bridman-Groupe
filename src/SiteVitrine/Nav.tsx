@@ -36,7 +36,7 @@ function Nav() {
 
                         {/* MENU DESKTOP */}
                         <div className="hidden min-[1048px]:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
-                            <NavLink to="/" className={linkClass}>Home</NavLink>
+                            <NavLink to="/" className={linkClass}>Accueil</NavLink>
                             <NavLink to="/about" className={linkClass}>Services</NavLink>
                             <NavLink to="/membres" className={linkClass}>Membres</NavLink>
                             <NavLink to="/contact" className={linkClass}>Contact</NavLink>
