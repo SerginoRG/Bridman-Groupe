@@ -5,13 +5,11 @@ import logo from "../assets/bridman-groupe.png"
 function Nav() {
     const [isOpen, setIsOpen] = useState(false)
 
-    // style commun desktop
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         isActive
             ? "text-blue-400 font-bold transition duration-300"
             : "text-white hover:text-blue-300 transition duration-300 font-medium"
 
-    // style mobile
     const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>
         isActive
             ? "text-blue-400 font-bold py-2 px-4"
@@ -19,7 +17,7 @@ function Nav() {
 
     return (
         <>
-            <nav className="fixed top-5 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[90%] lg:w-[85%] bg-white/10 backdrop-blur-md shadow-lg z-50 rounded-2xl md:rounded-3xl">
+            <nav className="fixed top-5 left-1/2 transform -translate-x-1/2 w-[95%] min-[1048px]:w-[90%] lg:w-[85%] bg-white/10 backdrop-blur-md shadow-lg z-50 rounded-2xl min-[1048px]:rounded-3xl">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-5">
                     <div className="flex items-center justify-between py-3">
 
@@ -37,29 +35,18 @@ function Nav() {
                         </div>
 
                         {/* MENU DESKTOP */}
-                        <div className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
-                            <NavLink to="/" className={linkClass}>
-                                Home
-                            </NavLink>
-
-                            <NavLink to="/about" className={linkClass}>
-                                Services
-                            </NavLink>
-
-                            <NavLink to="/membres" className={linkClass}>
-                                Membres
-                            </NavLink>
-
-                            <NavLink to="/contact" className={linkClass}>
-                                Contact
-                            </NavLink>
+                        <div className="hidden min-[1048px]:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
+                            <NavLink to="/" className={linkClass}>Home</NavLink>
+                            <NavLink to="/about" className={linkClass}>Services</NavLink>
+                            <NavLink to="/membres" className={linkClass}>Membres</NavLink>
+                            <NavLink to="/contact" className={linkClass}>Contact</NavLink>
                         </div>
 
                         {/* ESPACE DROITE */}
-                        <div className="hidden md:block w-32"></div>
+                        <div className="hidden min-[1048px]:block w-32"></div>
 
                         {/* BURGER */}
-                        <div className="md:hidden">
+                        <div className="min-[1048px]:hidden">
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
                                 className="text-white focus:outline-none"
@@ -78,31 +65,17 @@ function Nav() {
                     </div>
 
                     {/* MENU MOBILE */}
-                    <div className={`md:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                    <div className={`min-[1048px]:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                         <div className="flex flex-col items-center space-y-3 pb-4">
-
-                            <NavLink to="/" onClick={() => setIsOpen(false)} className={mobileLinkClass}>
-                                Home
-                            </NavLink>
-
-                            <NavLink to="/about" onClick={() => setIsOpen(false)} className={mobileLinkClass}>
-                                Services
-                            </NavLink>
-
-                            <NavLink to="/membres" onClick={() => setIsOpen(false)} className={mobileLinkClass}>
-                                Membres
-                            </NavLink>
-
-                            <NavLink to="/contact" onClick={() => setIsOpen(false)} className={mobileLinkClass}>
-                                Contact
-                            </NavLink>
-
+                            <NavLink to="/" onClick={() => setIsOpen(false)} className={mobileLinkClass}>Home</NavLink>
+                            <NavLink to="/about" onClick={() => setIsOpen(false)} className={mobileLinkClass}>Services</NavLink>
+                            <NavLink to="/membres" onClick={() => setIsOpen(false)} className={mobileLinkClass}>Membres</NavLink>
+                            <NavLink to="/contact" onClick={() => setIsOpen(false)} className={mobileLinkClass}>Contact</NavLink>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            {/* CONTENU DES PAGES */}
             <div>
                 <Outlet />
             </div>
