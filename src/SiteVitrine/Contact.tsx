@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import type { ChangeEvent, FormEvent } from "react"
 import { motion, useAnimation, useInView } from "framer-motion"
 import Image from "../assets/Contact/one.jpg"
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCommentDots } from "react-icons/fa"
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCommentDots,FaWhatsapp } from "react-icons/fa"
 
 // Composant d'animation texte lettre par lettre
 const AnimatedText = ({ text, className, delay = 0 }: { text: string; className: string; delay?: number }) => {
@@ -138,9 +138,11 @@ const InfoCard = ({ icon: Icon, label, value, delay = 0 }: { icon: React.Compone
       <p className="text-gray-400 text-xs">{label}</p>
       <AnimatedText
         text={value}
-        className="text-white text-xs font-semibold"
+        className={`text-white font-semibold ${
+            label === "Email" ? "text-[11px] break-all" : "text-xs"
+        }`}
         delay={delay + 0.3}
-      />
+        />
     </motion.div>
   )
 }
@@ -389,7 +391,7 @@ function Contact() {
                 delay={0.1}
               />
               <InfoCard
-                icon={FaPhone}
+                icon={FaWhatsapp}
                 label="WhatsApp"
                 value="+261 34 08 631 95"
                 delay={0.2}
