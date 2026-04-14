@@ -203,7 +203,7 @@ function Membres() {
       iconBg: "bg-purple-600",
       tagBg: "bg-purple-500/20",
       tagColor: "text-purple-300",
-      tags: ["JavaScript", "Python", "Tailwind"]
+      tags: ["JavaScript", "Python", "Java"]
     },
     {
       name: "Nafissa",
