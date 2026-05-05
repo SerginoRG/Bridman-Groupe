@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { motion, useAnimation, useInView } from "framer-motion"
 import Fondateur from "../assets/Membres/brido.jpeg"
-import Dev from "../assets/Membres/developppeur.png"
+import Dev from "../assets/Membres/sariko_4k.png"
 import Naf from "../assets/Membres/naf.jpeg"
 
 interface Member {
